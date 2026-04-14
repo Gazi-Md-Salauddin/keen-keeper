@@ -1,10 +1,13 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
+import { IoIosHome } from "react-icons/io";
+import { IoTimerOutline } from "react-icons/io5";
+import { ImStatsDots } from "react-icons/im";
 
 const Navbar = () => {
     return (
         <div>
-            <div className="navbar shadow-sm">
+            <div className="navbar shadow-sm px-3">
                 <div className="navbar-start md:hidden">
                     <div className="dropdown md:hidden">
                         <div
@@ -33,13 +36,13 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow md:hidden"
                         >
                             <li>
-                                <a>Home</a>
+                                <a><IoIosHome />Home</a>
                             </li>
                             <li>
-                                <a>Timeline</a>
+                                <a><IoTimerOutline />Timeline</a>
                             </li>
                             <li>
-                                <a>Stats</a>
+                                <a><ImStatsDots />Stats</a>
                             </li>
                         </ul>
                     </div>
@@ -50,13 +53,13 @@ const Navbar = () => {
                 <div className="md:navbar-end">
                     <ul className="hidden md:flex gap-3 pr-4">
                         <li>
-                            <a>Home</a>
+                            <a className="flex items-center gap-2"><IoIosHome />Home</a>
                         </li>
                         <li>
-                            <a>Timeline</a>
+                            <a className="flex items-center gap-2"><IoTimerOutline />Timeline</a>
                         </li>
                         <li>
-                            <a>Stats</a>
+                            <a className="flex items-center gap-2"><ImStatsDots />Stats</a>
                         </li>
                     </ul>
                 </div>
