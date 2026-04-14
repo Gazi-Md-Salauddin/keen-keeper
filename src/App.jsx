@@ -5,13 +5,20 @@ import Friends from './components/Friends/Friends'
 import Footer from './components/Footer/Footer'
 import './App.css'
 
+const getFriends = async() => {
+  const res = await fetch("/friends.json")
+  return res.json();
+}
+
+const friendsPromise = getFriends();
+
 function App() {
 
   return (
     <>
           <Navbar/>
           <Banner/>
-          <Friends/>
+          <Friends friendsPromise={friendsPromise}/>
           <Footer/>
     </>
   )
