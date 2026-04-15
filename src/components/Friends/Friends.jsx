@@ -1,7 +1,9 @@
-import { use } from "react";
+import React from "react";
+import { useNavigate } from 'react-router-dom'
 
-const Friends = ({ friendsPromise }) => {
-    const friends = use(friendsPromise);
+const Friends = ({ friends }) => {
+  
+  const navigate = useNavigate();
 
     {/*dynamic badge color*/}
     const statusColor = {
@@ -20,6 +22,7 @@ const Friends = ({ friendsPromise }) => {
                     <div
                         key={friend.id}
                         className="card bg-base-100 w-full shadow-sm"
+                        onClick={() => navigate(`/friend/${friend.id}`)}
                     >
                         <figure className="px-10 pt-10">
                             <img
