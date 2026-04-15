@@ -3,12 +3,15 @@ import Logo from "../../assets/logo.png";
 import { IoIosHome } from "react-icons/io";
 import { IoTimerOutline } from "react-icons/io5";
 import { ImStatsDots } from "react-icons/im";
+import { NavLink } from 'react-router-dom'
+
 
 const Navbar = () => {
     return (
         <div>
             <div className="navbar shadow-sm px-3">
                 <div className="navbar-start md:hidden">
+                    {/*humberger menu*/}
                     <div className="dropdown md:hidden">
                         <div
                             tabIndex={0}
@@ -36,30 +39,52 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow md:hidden"
                         >
                             <li>
-                                <a><IoIosHome />Home</a>
+                                <NavLink to="/" className={({isActive}) => isActive ? "bg-green-800 text-white" : ""}>
+                                    <IoIosHome />
+                                    Home
+                                </NavLink>
                             </li>
                             <li>
-                                <a><IoTimerOutline />Timeline</a>
+                                <NavLink to="/Timeline" className={({isActive}) => isActive ? "bg-green-800 text-white" : ""}>
+                                    <IoTimerOutline />
+                                    Timeline
+                                </NavLink>
                             </li>
                             <li>
-                                <a><ImStatsDots />Stats</a>
+                                <NavLink to="/stats" className={({isActive}) => isActive ? "bg-green-800 text-white" : ""}>
+                                    <ImStatsDots />
+                                    Stats
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
                 </div>
+
+                {/*Logo*/}
                 <div className="navbar-center md:navbar-start pl-4">
                     <img src={Logo} alt="Logo" />
                 </div>
+
+                {/*nav links for large screen*/}
                 <div className="md:navbar-end">
                     <ul className="hidden md:flex gap-3 pr-4">
                         <li>
-                            <a className="flex items-center gap-2"><IoIosHome />Home</a>
+                            <NavLink to="/" className={({isActive}) =>`flex items-center p-2 gap-2 rounded-xl ${isActive ? "bg-green-800 text-white" : ""}`}>
+                                <IoIosHome />
+                                Home
+                            </NavLink>
                         </li>
                         <li>
-                            <a className="flex items-center gap-2"><IoTimerOutline />Timeline</a>
+                            <NavLink to="/timeline" className={({isActive}) =>`flex items-center p-2 gap-2 rounded-xl ${isActive ? "bg-green-800 text-white" : ""}`}>
+                                <IoTimerOutline />
+                                Timeline
+                            </NavLink>
                         </li>
                         <li>
-                            <a className="flex items-center gap-2"><ImStatsDots />Stats</a>
+                            <NavLink to="/stats" className={({isActive}) =>`flex items-center p-2 gap-2 rounded-xl ${isActive ? "bg-green-800 text-white" : ""}`}>
+                                <ImStatsDots />
+                                Stats
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
