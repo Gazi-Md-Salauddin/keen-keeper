@@ -6,6 +6,7 @@ import Text from "../../assets/text.png";
 import Video from "../../assets/video.png";
 import { MdHistory } from "react-icons/md";
 import { useInteraction } from '../../context/InteractionContext'
+import { toast } from 'react-toastify';
 
 const FriendDetails = () => {
     const { id } = useParams();
@@ -34,6 +35,7 @@ const FriendDetails = () => {
       addInteraction(newItem);
       
       setInteraction(prev => [newItem, ...prev])
+      toast.success(`${type} with ${friend.name}`)
     }
 
     return (
