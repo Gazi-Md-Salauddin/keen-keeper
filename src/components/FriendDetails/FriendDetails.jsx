@@ -1,8 +1,11 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import Call from '../../assets/call.png'
-import Text from '../../assets/text.png'
-import Video from '../../assets/video.png'
+import { useState } from "react";
+import Call from "../../assets/call.png";
+import Text from "../../assets/text.png";
+import Video from "../../assets/video.png";
+import { MdHistory } from "react-icons/md";
+import { useInteraction } from '../../context/InteractionContext'
 
 const FriendDetails = () => {
     const { id } = useParams();
@@ -16,10 +19,27 @@ const FriendDetails = () => {
         "on-track": "bg-[#244D3F]"
     };
 
+    
+    const [interaction, setInteraction] = useState([])
+    
+    const { addInteraction } = useInteraction();
+    
+    const handleAction = (type, icon) => {
+      const newItem = {
+        type: type,
+        icon,
+        time: new Date().toLocaleDateString(),
+        FriendName: friend.name,
+      };
+      addInteraction(newItem);
+      
+      setInteraction(prev => [newItem, ...prev])
+    }
+
     return (
-        <div className="bg-gray-100 border shadow">
-            <div className="text-center px-10 bg-gray-100 rounded mt-4 mb-4">
-                <div className="left space-y-4">
+        <div className="bg-gray-100 shadow pb-6">
+            <div className="px-10 bg-gray-100 rounded mt-4 mb-4 md:flex gap-3">
+                <div className="text-center space-y-4">
                     <div className="space-y-2 p-2 bg-white rounded">
                         <figure className="px-10 pt-10 flex justify-center">
                             <img
@@ -29,12 +49,22 @@ const FriendDetails = () => {
                             />
                         </figure>
                         <h2 className="text-2xl font-bold">{friend.name}</h2>
+                        <div className="flex flex-col gap-3 justify-center items-center">
+                            {friend.tags.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className="badge badge-success flex flex-col text-center justify-center"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                         <span
                             className={`badge text-sm text-white ${statusColor[friend.status]}`}
                         >
                             {friend.status}
                         </span>
-                        <p>{friend.bio}</p>
+                        <p className="text-gray-400">"{friend.bio}"</p>
                         <p>preffered: {friend.email}</p>
                     </div>
                     <div className="bg-white rounded">
@@ -47,8 +77,8 @@ const FriendDetails = () => {
                         <p className="text-red-500">Delete</p>
                     </div>
                 </div>
-                <div className="right mt-4">
-                    <div className="flex gap-3 flex-wrap">
+                <div className="mt-4">
+                    <div className="text-center flex gap-3 flex-wrap">
                         <div className="bg-white p-2 rounded">
                             <h2>60</h2>
                             <p>Days since contact</p>
@@ -77,22 +107,48 @@ const FriendDetails = () => {
                     </div>
 
                     <div className="bg-white flex gap-3 mt-4 p-4 justify-center">
-                      <div className="bg-gray-100 p-4">
-                        <img src={Call} alt="call" className="w-6 h-6 flex justify-center"/>
-                        <p>Call</p>
-                      </div>
-                      <div className="bg-gray-100 p-4">
-                        <img src={Text} alt="text" className="w-6 h-6 flex justify-center"/>
-                        <p>Text</p>
-                      </div>
-                      <div className="bg-gray-100 p-4">
-                        <img src={Video} alt="video" className="w-6 h-6"/>
-                        <p>Video</p>
-                      </div>
+                        <button className="bg-gray-100 p-4" onClick={() => handleAction("call", Call)}>
+                            <img
+                                src={Call}
+                                alt="call"
+                                className="w-6 h-6 flex justify-center"
+                            />
+                            <p>Call</p>
+                        </button>
+                        <button className="bg-gray-100 p-4" onClick={() => handleAction("text", Text)}>
+                            <img
+                                src={Text}
+                                alt="text"
+                                className="w-6 h-6 flex justify-center"
+                            />
+                            <p>Text</p>
+                        </button>
+                        <button className="bg-gray-100 p-4" onClick={() => handleAction("video", Video)}>
+                            <img
+                                src={Video}
+                                alt="video"
+                                className="w-6 h-6 flex justify-center"
+                            />
+                            <p>Video</p>
+                        </button>
                     </div>
-                    
-                    <div className="bg-white mt-4">
-                      <h2 className="font-bold">Recent Interations</h2>
+
+                    <div className="bg-white mt-4 pb-6 rounded">
+                      <div className="flex justify-between px-2 pt-2">
+                        <h2 className="font-bold">Recent Interations</h2>
+                        <button className="btn flex gap-2 items-center"><MdHistory />Full History</button>
+                      </div>
+                        {
+                          interaction.length === 0 ? <h2 className="text-2xl text-center py-10">Not Interaction Yet</h2> : interaction.map((item, index) => (
+                          <div key={index} className="flex justify-between p-2">
+                            <div className="flex gap-2">
+                            <img src={item.icon} alt={item.type} className="w-6 h-6"/>
+                            <p>{item.type}</p>
+                            </div>
+                            <small>{item.time}</small>
+                          </div>
+                          ))
+                        }
                     </div>
                 </div>
             </div>
