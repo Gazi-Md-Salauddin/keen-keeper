@@ -1,4 +1,4 @@
-# KeenKeeper -  keep your Friendships
+# KeenKeeper
 
 ## 📝 Description
 Keenkeeper is a modern interaction tracking system to monitor communication and stay connected effortlessly.
