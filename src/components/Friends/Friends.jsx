@@ -11,6 +11,8 @@ const Friends = ({ friends }) => {
         "almost due": "bg-[#E4AD44]",
         "on-track": "bg-[#244D3F]"
     };
+    
+    
 
     return (
         <div className="px-4 space-y-4 md:px-47 mt-10">
@@ -18,7 +20,8 @@ const Friends = ({ friends }) => {
 
             {/*data rendering*/}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-                {friends.map(friend => (
+                {
+                friends.map(friend => (
                     <div
                         key={friend.id}
                         className="card bg-base-100 w-full shadow-sm"

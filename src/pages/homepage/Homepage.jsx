@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Banner from '../../components/Banner/Banner'
 import Friends from '../../components/Friends/Friends'
 import StatCard from '../../components/StatCard/StatCard'
-import { useLoaderData } from 'react-router-dom'
+import { PulseLoader } from 'react-spinners'
+
 
 const Homepage = () => {
   
-  const friends = useLoaderData();
+  const [friends, setFriends] = useState([])
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    fetch("/friends.json")
+    .then(res => res.json())
+    .then(friends => {
+      setFriends(friends);
+      setLoading(false)
+    });
+  }, []);
+  
+  if(loading) {
+    return(
+      <div className="flex justify-center items-center h-screen">
+        <PulseLoader />
+      </div>
+      )
+  }
   
   return (
     <div>
