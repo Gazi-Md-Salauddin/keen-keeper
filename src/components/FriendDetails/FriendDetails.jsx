@@ -4,6 +4,9 @@ import { useState } from "react";
 import Call from "../../assets/call.png";
 import Text from "../../assets/text.png";
 import Video from "../../assets/video.png";
+import { RiNotificationSnoozeLine } from "react-icons/ri";
+import { IoIosArchive } from "react-icons/io";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdHistory } from "react-icons/md";
 import { useInteraction } from '../../context/InteractionContext'
 import { toast } from 'react-toastify';
@@ -70,13 +73,13 @@ const FriendDetails = () => {
                         <p>preffered: {friend.email}</p>
                     </div>
                     <div className="bg-white rounded">
-                        <p>Snooze 2 weeks</p>
+                        <p className="flex gap-2 justify-center items-center"><RiNotificationSnoozeLine />Snooze 2 weeks</p>
                     </div>
                     <div className="bg-white rounded">
-                        <p>Archive</p>
+                        <p className="flex gap-2 justify-center items-center"><IoIosArchive />Archive</p>
                     </div>
                     <div className="bg-white rounded">
-                        <p className="text-red-500">Delete</p>
+                        <p className="text-red-500 flex gap-2 justify-center items-center"><RiDeleteBin5Line />Delete</p>
                     </div>
                 </div>
                 <div className="mt-4">
